@@ -7,16 +7,20 @@ using Word = Microsoft.Office.Interop.Word;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
 
+using System.Windows.Forms;
+
 namespace CM_Utilities_v7
 {
     public partial class ThisAddIn
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            MessageBox.Show("Add-In is starting up!!","Testing C# Word Add-In", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
+            MessageBox.Show("Add-In is shutting down!!","Testing C# Word Add-In", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #region VSTO generated code
