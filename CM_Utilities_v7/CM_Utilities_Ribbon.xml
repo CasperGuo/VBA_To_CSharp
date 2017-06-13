@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="mso_c1.17F7861" label="Contract Mgmt Utilities" >
+        <group id="mso_c2.17F7861" label="Main Utilities" autoScale="true">
+          <button id="Clean_Up_Riders_0_1847749" label="Clean Up Riders" imageMso="ShapesDuplicate" visible="true" size="large" screentip="Alt-C,R" onAction="Clean_Up_Riders_Ribbon" getEnabled="GetEnabled" />
+          <button id="MakeAmendment_7_1847749" label="Make HED Amendment" imageMso="ReviewDisplayForReview" visible="true" size="large" screentip="Alt-M,A" onAction="MakeHEDAmendment_Ribbon" getEnabled="GetEnabled" />
+          <button id="SSL_6_1847749" label="Create Sole Source Letter" imageMso="AutoFormat" onAction="CreateSoleSourceLetter_Ribbon" visible="true" screentip="Alt-S,L" size="large" />
+          <button id="RefreshShortcuts_1_1847749" label="Refresh Shortcut Keys" imageMso="RecurrenceEdit" onAction="RefreshShortcuts_Ribbon" visible="true" screentip="Alt-R,K" size="large"/>
+        </group>
+        <group id="mso_c3.181061F" label="Formatting" autoScale="true">
+          <button id="DeleteMyRoad_8_1847749" label="Delete MyRoad Text" imageMso="DeclineInvitation" onAction="DeleteMyRoad_Ribbon" screentip="Alt-D,M" visible="true" size="large" getEnabled="GetEnabled" />
+          <button id="FormatPrice_2_1847749" label="Price" imageMso="DollarSign" onAction="FormatPrice_Ribbon" screentip="Alt-$" visible="true" size="large" getEnabled="GetEnabled" />
+          <button id="FormatDateSpellOutMonth_3_1847749" label="Spell Out Date" imageMso="TableSelect" onAction="FormatDateSpellOutMonth_Ribbon" screentip="Alt-F,D" visible="true" size="large" getEnabled="GetEnabled" />
+          <button id="FormatPhoneNumber_4_1847749" label="Phone Number" imageMso="AutoDial" onAction="FormatPhoneNumber_Ribbon" screentip="Alt-F,P" visible="true" size="large" getEnabled="GetEnabled" />
+          <button id="InterfaceForSpellNumber_5_1847749" label="Spell Out Number" imageMso="MailMergeResultsPreview" onAction="InterfaceForSpellNumber_Ribbon" screentip="Alt-S,N" visible="true" size="large" getEnabled="GetEnabled" />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+

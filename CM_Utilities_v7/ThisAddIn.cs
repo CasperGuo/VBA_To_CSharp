@@ -15,13 +15,17 @@ namespace CM_Utilities_v7
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            MessageBox.Show("Add-In is starting up!!","Testing C# Word Add-In", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
-            MessageBox.Show("Add-In is shutting down!!","Testing C# Word Add-In", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+        {
+            return new CM_Utilities_Ribbon();
+        }
+
 
         #region VSTO generated code
 
