@@ -66,8 +66,9 @@ namespace CM_Utilities_v7
             const string strRIDER_NAME_TOKEN = "-";
             const string strRIDER_HEADER = "Schedule ot College Board";
 
-            try
+            /*try
             {
+            */
                 if (!currentDoc.TrackRevisions)
                     currentDoc.TrackRevisions = true;
 
@@ -88,12 +89,22 @@ namespace CM_Utilities_v7
                              * above, however that line of code is already 3 dots deep (a reference of
                              * a reference of a reference) and that's bad coding practice
                              */
-                            Word.Range rngFld= para.Range;
+                            Word.Range rngFld = para.Range;
                             rngFld.Select();
                             /* Each rider name starts with a dash (-) and is highlighted
                              * Added 02/11/2016, after testing against old riders, the OR clause.
                              * May delete in the coming months when no old riders
                              */
+                             if((rngFld.Characters[1].Text==strRIDER_NAME_TOKEN
+                                && rngFld.Characters[1].HighlightColorIndex==Word.WdColorIndex.wdBrightGreen
+                                && app.Selection.Paragraphs.Count==1)
+                                ||
+                                (rngFld.Characters[1].HighlightColorIndex==Word.WdColorIndex.wdBrightGreen
+                                && app.Selection.Paragraphs.Count==1))
+                                {
+                                    app.Selection.Paragraphs[1].Range.Delete();
+                                    intRidersTotal++;
+                                }
                         }
                         else
                         {
@@ -115,11 +126,13 @@ namespace CM_Utilities_v7
                     else
                         MessageBox.Show("Number of Unnecessary Riders Found: " + intRidersTotal);
                 }
-            }
-            catch (Exception)
+            //}
+
+            /*catch (Exception)
             {
                 throw;
             }
+            */
         }
         public void MakeHEDAmendment_Ribbon(Office.IRibbonControl rbnCtrl) { }
         public void CreateSoleSourceLetter_Ribbon(Office.IRibbonControl rbnCtrl) { }
