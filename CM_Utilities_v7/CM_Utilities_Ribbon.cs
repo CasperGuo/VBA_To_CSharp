@@ -94,6 +94,17 @@ namespace CM_Utilities_v7
                              * Added 02/11/2016, after testing against old riders, the OR clause.
                              * May delete in the coming months when no old riders
                              */
+
+                            /* This is a much "simplier" and straight forward deletion of the unncessary riders
+                             * This is MORE related to the architecture i.e. Merge Field is either "True" Or "False"
+                             * So if the field code is "False = True", then delete it, that field
+                             * Tested an it works.
+                             * Look at old VBA code to see how complicated I made the selection.
+                             */
+
+                            if (fld.Code.Text.Contains("\"False\" = \"True"))
+                                {app.Selection.Text = "DELETE THIS"; }
+                                
                         }
                         else
                         {
