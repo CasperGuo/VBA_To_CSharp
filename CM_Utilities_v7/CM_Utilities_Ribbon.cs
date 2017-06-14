@@ -80,31 +80,18 @@ namespace CM_Utilities_v7
                          * to display the ENTIRE RIDER or if it is just a field at the end of
                          * a lone paragraph.  If lone paragraph, then delete.
                         */
-                        Word.Paragraph para = fld.Result.Paragraphs[1];
                         if(fld.Type==Word.WdFieldType.wdFieldIf)
                         {
-                            /* Have to look at paragraph range in order to get to
-                             * the characters selection. I could have stuck .range at the end of Paragraphs(1)
-                             * above, however that line of code is already 3 dots deep (a reference of
-                             * a reference of a reference) and that's bad coding practice
-                             */
-                            Word.Range rngFld= para.Range;
-                            rngFld.Select();
-                            /* Each rider name starts with a dash (-) and is highlighted
-                             * Added 02/11/2016, after testing against old riders, the OR clause.
-                             * May delete in the coming months when no old riders
-                             */
-
                             /* This is a much "simplier" and straight forward deletion of the unncessary riders
                              * This is MORE related to the architecture i.e. Merge Field is either "True" Or "False"
                              * So if the field code is "False = True", then delete it, that field
                              * Tested an it works.
                              * Look at old VBA code to see how complicated I made the selection.
                              */
-
                             if (fld.Code.Text.Contains("\"False\" = \"True"))
-                                {app.Selection.Text = "DELETE THIS"; }
-                                
+                                {
+                                    fld.Code.Paragraphs[1].Range.Delete();
+                                }
                         }
                         else
                         {
