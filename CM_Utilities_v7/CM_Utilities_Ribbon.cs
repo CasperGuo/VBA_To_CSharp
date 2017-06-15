@@ -90,7 +90,7 @@ namespace CM_Utilities_v7
                              */
                             if (fld.Code.Text.Contains("\"False\" = \"True"))
                                 {
-                                    fld.Code.Paragraphs[1].Range.Delete();
+                                    fld.Parent.Delete();
                                 }
                         }
                         else
