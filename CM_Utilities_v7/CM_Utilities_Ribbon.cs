@@ -66,9 +66,8 @@ namespace CM_Utilities_v7
             const string strRIDER_NAME_TOKEN = "-";
             const string strRIDER_HEADER = "Schedule ot College Board";
 
-            /*try
+            try
             {
-            */
                 if (!currentDoc.TrackRevisions)
                     currentDoc.TrackRevisions = true;
 
@@ -81,29 +80,17 @@ namespace CM_Utilities_v7
                          * to display the ENTIRE RIDER or if it is just a field at the end of
                          * a lone paragraph.  If lone paragraph, then delete.
                         */
-                        Word.Paragraph para = fld.Result.Paragraphs[1];
                         if(fld.Type==Word.WdFieldType.wdFieldIf)
                         {
-                            /* Have to look at paragraph range in order to get to
-                             * the characters selection. I could have stuck .range at the end of Paragraphs(1)
-                             * above, however that line of code is already 3 dots deep (a reference of
-                             * a reference of a reference) and that's bad coding practice
+                            /* This is a much "simplier" and straight forward deletion of the unncessary riders
+                             * This is MORE related to the architecture i.e. Merge Field is either "True" Or "False"
+                             * So if the field code is "False = True", then delete it, that field
+                             * Tested an it works.
+                             * Look at old VBA code to see how complicated I made the selection.
                              */
-                            Word.Range rngFld = para.Range;
-                            rngFld.Select();
-                            /* Each rider name starts with a dash (-) and is highlighted
-                             * Added 02/11/2016, after testing against old riders, the OR clause.
-                             * May delete in the coming months when no old riders
-                             */
-                             if((rngFld.Characters[1].Text==strRIDER_NAME_TOKEN
-                                && rngFld.Characters[1].HighlightColorIndex==Word.WdColorIndex.wdBrightGreen
-                                && app.Selection.Paragraphs.Count==1)
-                                ||
-                                (rngFld.Characters[1].HighlightColorIndex==Word.WdColorIndex.wdBrightGreen
-                                && app.Selection.Paragraphs.Count==1))
+                            if (fld.Code.Text.Contains("\"False\" = \"True"))
                                 {
-                                    app.Selection.Paragraphs[1].Range.Delete();
-                                    intRidersTotal++;
+                                    fld.Parent.Delete();
                                 }
                         }
                         else
@@ -126,13 +113,11 @@ namespace CM_Utilities_v7
                     else
                         MessageBox.Show("Number of Unnecessary Riders Found: " + intRidersTotal);
                 }
-            //}
-
-            /*catch (Exception)
+            }
+            catch (Exception)
             {
                 throw;
             }
-            */
         }
         public void MakeHEDAmendment_Ribbon(Office.IRibbonControl rbnCtrl) { }
         public void CreateSoleSourceLetter_Ribbon(Office.IRibbonControl rbnCtrl) { }

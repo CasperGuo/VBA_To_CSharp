@@ -2,7 +2,7 @@
 <customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
   <ribbon>
     <tabs>
-      <tab id="mso_c1.17F7861" label="Contract Mgmt Utilities" >
+      <tab id="mso_c1.17F7861" label="Contract Management Tools" >
         <group id="mso_c2.17F7861" label="Main Utilities" autoScale="true">
           <button id="Clean_Up_Riders_0_1847749" label="Clean Up Riders" imageMso="ShapesDuplicate" visible="true" size="large" screentip="Alt-C,R" onAction="Clean_Up_Riders_Ribbon" getEnabled="GetEnabled" />
           <button id="MakeAmendment_7_1847749" label="Make HED Amendment" imageMso="ReviewDisplayForReview" visible="true" size="large" screentip="Alt-M,A" onAction="MakeHEDAmendment_Ribbon" getEnabled="GetEnabled" />
