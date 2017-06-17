@@ -62,9 +62,11 @@ namespace CM_Utilities_v7
             Word.Document currentDoc = Globals.ThisAddIn.Application.ActiveDocument;
 
             int intRidersTotal=0;
+            int intUnnecessaryRiders = 0;
+            int intNecessaryRiders = 0;
 
-            const string strRIDER_NAME_TOKEN = "-";
-            const string strRIDER_HEADER = "Schedule ot College Board";
+            // const string strRIDER_NAME_TOKEN = "-";
+            const string strRIDER_HEADER = "Schedule to College Board";
 
             try
             {
@@ -88,21 +90,28 @@ namespace CM_Utilities_v7
                              * Tested an it works.
                              * Look at old VBA code to see how complicated I made the selection.
                              */
+                            fld.Select();
                             if (fld.Code.Text.Contains("\"False\" = \"True"))
                                 {
-                                    fld.Parent.Delete();
+                                    intUnnecessaryRiders++;
                                 }
+                            else
+                            { 
+                                intNecessaryRiders++;
+                                app.Selection.Fields[1].Unlink();
+                                app.Selection.Find.Execute(strRIDER_HEADER);
+                                if (app.Selection.Find.Found)
+                                    app.Selection.ParagraphFormat.PageBreakBefore = app.Selection.ParagraphFormat.PageBreakBefore;
+                            }
+                            app.Selection.Paragraphs[1].Range.Select();
+                            app.Selection.Paragraphs[1].Range.Delete();
+                            intRidersTotal++;
                         }
                         else
                         {
                             /* Get rid of the highlighted Rider Names here
                              * During testing on 02/11/2016 noticed this ALONE works to clean up riders
                              */
-                            app.Selection.Fields[1].Unlink();
-                            app.Selection.Paragraphs[1].Range.Delete();
-                            app.Selection.Find.Execute(strRIDER_HEADER);
-                            if (app.Selection.Find.Found)
-                                app.Selection.ParagraphFormat.PageBreakBefore = 1;
                         }
                     }
 
@@ -111,7 +120,9 @@ namespace CM_Utilities_v7
                         MessageBox.Show("No Riders exist in this document:\n");
                     }
                     else
-                        MessageBox.Show("Number of Unnecessary Riders Found: " + intRidersTotal);
+                        MessageBox.Show("Number of Unnecessary Riders Found: " + intUnnecessaryRiders + "\n"
+                            + "Number of Necessary Riders Found " + intNecessaryRiders + "\n"
+                            + "Number of Total Riders Found " + intRidersTotal);
                 }
             }
             catch (Exception)
