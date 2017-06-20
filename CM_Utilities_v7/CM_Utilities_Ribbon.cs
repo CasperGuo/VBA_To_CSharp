@@ -60,6 +60,8 @@ namespace CM_Utilities_v7
         {
             Word.Application app = Globals.ThisAddIn.Application;
             Word.Document currentDoc = Globals.ThisAddIn.Application.ActiveDocument;
+            Word.Paragraph fldPara;
+            Word.Range fldRider;
 
             int intRidersTotal=0;
             int intUnnecessaryRiders = 0;
@@ -90,21 +92,22 @@ namespace CM_Utilities_v7
                              * Tested an it works.
                              * Look at old VBA code to see how complicated I made the selection.
                              */
-                            fld.Select();
+                            fldPara = fld.Result.Paragraphs[1];
+                            fldRider = fld.Result;
                             if (fld.Code.Text.Contains("\"False\" = \"True"))
                                 {
                                     intUnnecessaryRiders++;
                                 }
                             else
                             { 
+                                fld.Unlink();
                                 intNecessaryRiders++;
-                                app.Selection.Fields[1].Unlink();
-                                app.Selection.Find.Execute(strRIDER_HEADER);
-                                if (app.Selection.Find.Found)
-                                    app.Selection.ParagraphFormat.PageBreakBefore = app.Selection.ParagraphFormat.PageBreakBefore;
+                                fldRider.Find.Execute(strRIDER_HEADER);
+                                if (fldRider.Find.Found)
+                                    fldRider.ParagraphFormat.PageBreakBefore = -1;
                             }
-                            app.Selection.Paragraphs[1].Range.Select();
-                            app.Selection.Paragraphs[1].Range.Delete();
+                            fldPara.Range.Select();
+                            fldPara.Range.Delete();
                             intRidersTotal++;
                         }
                         else
@@ -125,13 +128,16 @@ namespace CM_Utilities_v7
                             + "Number of Total Riders Found " + intRidersTotal);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
+        public void CreateSoleSourceLetter_Ribbon(Office.IRibbonControl rbnCtrl)
+        {
+            // I think I'm going to try and do the "Web Version of the Sole Source Letter for this one.
+        }
         public void MakeHEDAmendment_Ribbon(Office.IRibbonControl rbnCtrl) { }
-        public void CreateSoleSourceLetter_Ribbon(Office.IRibbonControl rbnCtrl) { }
         public void RefreshShortcuts_Ribbon(Office.IRibbonControl rbnCtrl) { }
         public void DeleteMyRoad_Ribbon(Office.IRibbonControl rbnCtrl) { }
         public void FormatPrice_Ribbon(Office.IRibbonControl rbnCtrl) { }
